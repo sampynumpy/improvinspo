@@ -1,0 +1,71 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="900"
+  height="180"
+  viewBox="0 0 900 180"
+  style="background:#2c2c2c; border-radius:10px; pointer-events:all;"
+>
+
+<!-- STRINGS -->
+<g stroke="#aaa" stroke-width="2">
+  <line x1="50" y1="30" x2="850" y2="30"/>
+  <line x1="50" y1="60" x2="850" y2="60"/>
+  <line x1="50" y1="90" x2="850" y2="90"/>
+  <line x1="50" y1="120" x2="850" y2="120"/>
+  <line x1="50" y1="150" x2="850" y2="150"/>
+  <line x1="50" y1="180" x2="850" y2="180"/>
+</g>
+
+<!-- FRETS -->
+<g stroke="#666" stroke-width="2">
+  <line x1="50" y1="20" x2="50" y2="180"/>
+  <line x1="110" y1="20" x2="110" y2="180"/>
+  <line x1="170" y1="20" x2="170" y2="180"/>
+  <line x1="230" y1="20" x2="230" y2="180"/>
+  <line x1="290" y1="20" x2="290" y2="180"/>
+  <line x1="350" y1="20" x2="350" y2="180"/>
+  <line x1="410" y1="20" x2="410" y2="180"/>
+  <line x1="470" y1="20" x2="470" y2="180"/>
+  <line x1="530" y1="20" x2="530" y2="180"/>
+  <line x1="590" y1="20" x2="590" y2="180"/>
+  <line x1="650" y1="20" x2="650" y2="180"/>
+  <line x1="710" y1="20" x2="710" y2="180"/>
+  <line x1="770" y1="20" x2="770" y2="180"/>
+  <line x1="830" y1="20" x2="830" y2="180"/>
+</g>
+
+<!-- NOTES -->
+<g fill="#ddd" font-size="10" text-anchor="middle">
+
+<!-- LOW E STRING -->
+<circle class="fret-note" data-note="E"  cx="80"  cy="30" r="10"/>
+<circle class="fret-note" data-note="F"  cx="140" cy="30" r="10"/>
+<circle class="fret-note" data-note="F#" cx="200" cy="30" r="10"/>
+<circle class="fret-note" data-note="G"  cx="260" cy="30" r="10"/>
+<circle class="fret-note" data-note="G#" cx="320" cy="30" r="10"/>
+<circle class="fret-note" data-note="A"  cx="380" cy="30" r="10"/>
+<circle class="fret-note" data-note="A#" cx="440" cy="30" r="10"/>
+<circle class="fret-note" data-note="B"  cx="500" cy="30" r="10"/>
+<circle class="fret-note" data-note="C"  cx="560" cy="30" r="10"/>
+<circle class="fret-note" data-note="C#" cx="620" cy="30" r="10"/>
+<circle class="fret-note" data-note="D"  cx="680" cy="30" r="10"/>
+<circle class="fret-note" data-note="D#" cx="740" cy="30" r="10"/>
+
+<!-- A STRING -->
+<circle class="fret-note" data-note="A"  cx="80"  cy="60" r="10"/>
+<circle class="fret-note" data-note="A#" cx="140" cy="60" r="10"/>
+<circle class="fret-note" data-note="B"  cx="200" cy="60" r="10"/>
+<circle class="fret-note" data-note="C"  cx="260" cy="60" r="10"/>
+<circle class="fret-note" data-note="C#" cx="320" cy="60" r="10"/>
+<circle class="fret-note" data-note="D"  cx="380" cy="60" r="10"/>
+<circle class="fret-note" data-note="D#" cx="440" cy="60" r="10"/>
+<circle class="fret-note" data-note="E"  cx="500" cy="60" r="10"/>
+<circle class="fret-note" data-note="F"  cx="560" cy="60" r="10"/>
+<circle class="fret-note" data-note="F#" cx="620" cy="60" r="10"/>
+<circle class="fret-note" data-note="G"  cx="680" cy="60" r="10"/>
+<circle class="fret-note" data-note="G#" cx="740" cy="60" r="10"/>
+
+<!-- You can continue similarly for D, G, B, high E strings -->
+
+</g>
+</svg>

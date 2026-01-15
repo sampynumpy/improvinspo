@@ -1,0 +1,51 @@
+body { font-family: Helvetica, sans-serif; background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364); color: white; margin: 0; padding: 50px 20px; } .app { display: flex; justify-content: center; gap: 30px; } .container { width: 600px; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; text-align: center; } .buttons { display: flex; flex-direction: column; gap: 10px; } .metronome { margin-top: 20px; } button { padding: 12px; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; background: #4caf50; color: white; } .result { margin-top: 25px; white-space: pre-wrap; } .sidebar { width: 260px; background: rgba(0,0,0,0.25); padding: 20px; border-radius: 12px; } .sidebar ul { list-style: none; padding: 0; } .sidebar li { background: rgba(255,255,255,0.1); padding: 8px; margin-bottom: 8px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; } .sidebar li.active { outline: 2px solid #4caf50; } .sidebar button { background: none; border: none; color: white; cursor: pointer; }
+#recallContainer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.25);
+}
+
+#recallContainer h3 {
+  margin-bottom: 6px;
+}
+
+#recallContainer p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+#recallFeedback {
+  margin-top: 10px;
+  font-weight: bold;
+}
+select {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+select option {
+  background: #203a43;
+  color: white;
+}
+
+
+.fret-note:hover {
+  fill: #ffd166;
+}
+
+.fret-note.selected {
+  fill: #ff9800;
+  stroke: #fff;
+  stroke-width: 2;
+  cursor: pointer;
+}
+.fret-note {
+  cursor: pointer;
+  transition: fill 0.2s, stroke 0.2s;
+}

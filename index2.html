@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ImprovInspo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- MAIN -->
+  <div class="container">
+    <h1>🎸 ImprovInspo</h1>
+
+    <div class="buttons">
+
+      <!-- KEY SELECT -->
+      <select onchange="selectKey(this.value)">
+        <option value="">Select Key</option>
+        <option>A</option>
+        <option>A#</option>
+        <option>B</option>
+        <option>C</option>
+        <option>C#</option>
+        <option>D</option>
+        <option>D#</option>
+        <option>E</option>
+        <option>F</option>
+        <option>F#</option>
+        <option>G</option>
+        <option>G#</option>
+      </select>
+
+      <button onclick="generateChords()">Generate Chords</button>
+      <button onclick="buildChord()">Build Chord</button>
+      <button onclick="saveProgression()">⭐ Save</button>
+      <button onclick="exportMidi()">🎹 Export MIDI</button>
+    </div>
+
+    <!-- METRONOME -->
+    <div class="metronome">
+      <label>Tempo: <span id="tempoValue">100</span> BPM</label>
+      <input type="range" min="40" max="200" value="100"
+             oninput="updateTempo(this.value)">
+      <button onclick="toggleMetronome()">⏱ Start / Stop Metronome</button>
+    </div>
+
+    <pre id="output" class="result"></pre>
+
+    <!-- RECALL -->
+    <div id="recallSection" style="display:none; margin-top:30px;">
+      <h3>🎯 Map the Fretboard</h3>
+      <p id="recallHint"></p>
+
+      <svg
+      id="fretboard"
+      xmlns="http://www.w3.org/2000/svg"
+      width="600"
+      height="200"
+      viewBox="0 0 900 260"
+      style="background:#1e1e1e; border-radius:12px; user-select:none;"
+      >
+      <!-- STRINGS -->
+       <g stroke="#888" stroke-width="2">
+        <line x1="60" y1="40"  x2="860" y2="40"/>
+        <line x1="60" y1="80"  x2="860" y2="80"/>
+        <line x1="60" y1="120" x2="860" y2="120"/>
+        <line x1="60" y1="160" x2="860" y2="160"/>
+        <line x1="60" y1="200" x2="860" y2="200"/>
+        <line x1="60" y1="240" x2="860" y2="240"/>
+      </g>
+      <!-- FRETS -->
+       <g stroke="#555" stroke-width="2">
+        <line x1="60"  y1="20" x2="60"  y2="260"/>
+        <line x1="130" y1="20" x2="130" y2="260"/>
+        <line x1="200" y1="20" x2="200" y2="260"/>
+        <line x1="270" y1="20" x2="270" y2="260"/>
+        <line x1="340" y1="20" x2="340" y2="260"/>
+        <line x1="410" y1="20" x2="410" y2="260"/>
+        <line x1="480" y1="20" x2="480" y2="260"/>
+        <line x1="550" y1="20" x2="550" y2="260"/>
+        <line x1="620" y1="20" x2="620" y2="260"/>
+        <line x1="690" y1="20" x2="690" y2="260"/>
+        <line x1="760" y1="20" x2="760" y2="260"/>
+        <line x1="830" y1="20" x2="830" y2="260"/>
+        <line x1="900" y1="20" x2="900" y2="260"/>
+      </g>
+      <!-- NOTES -->
+       <g id="notes" fill="#ccc">
+        <!-- LOW E -->
+         <circle class="fret-note" data-note="E"  cx="60"  cy="40" r="10"/>
+         <circle class="fret-note" data-note="F"  cx="95"  cy="40" r="10"/>
+         <circle class="fret-note" data-note="F#"  cx="165" cy="40" r="10"/>
+         <circle class="fret-note" data-note="G" cx="235" cy="40" r="10"/>
+         <circle class="fret-note" data-note="G#"  cx="305" cy="40" r="10"/>
+         <circle class="fret-note" data-note="A" cx="375" cy="40" r="10"/>
+         <circle class="fret-note" data-note="A#"  cx="445" cy="40" r="10"/>
+         <circle class="fret-note" data-note="B" cx="515" cy="40" r="10"/>
+         <circle class="fret-note" data-note="C"  cx="585" cy="40" r="10"/>
+         <circle class="fret-note" data-note="C#"  cx="655" cy="40" r="10"/>
+         <circle class="fret-note" data-note="D" cx="725" cy="40" r="10"/>
+         <circle class="fret-note" data-note="D#"  cx="795" cy="40" r="10"/>
+        <!-- A STRING -->
+         <circle class="fret-note" data-note="A"  cx="60"  cy="80" r="10"/>
+         <circle class="fret-note" data-note="A#"  cx="95"  cy="80" r="10"/>
+         <circle class="fret-note" data-note="B" cx="165" cy="80" r="10"/>
+         <circle class="fret-note" data-note="C"  cx="235" cy="80" r="10"/>
+         <circle class="fret-note" data-note="C#"  cx="305" cy="80" r="10"/>
+         <circle class="fret-note" data-note="D" cx="375" cy="80" r="10"/>
+         <circle class="fret-note" data-note="D#"  cx="445" cy="80" r="10"/>
+         <circle class="fret-note" data-note="E" cx="515" cy="80" r="10"/>
+         <circle class="fret-note" data-note="F"  cx="585" cy="80" r="10"/>
+         <circle class="fret-note" data-note="F#"  cx="655" cy="80" r="10"/>
+         <circle class="fret-note" data-note="G" cx="725" cy="80" r="10"/>
+         <circle class="fret-note" data-note="G#"  cx="795" cy="80" r="10"/>
+        <!-- D STRING -->
+         <circle class="fret-note" data-note="D"  cx="60"  cy="120" r="10"/>
+         <circle class="fret-note" data-note="D#"  cx="95"  cy="120" r="10"/>
+         <circle class="fret-note" data-note="E" cx="165" cy="120" r="10"/>
+         <circle class="fret-note" data-note="F"  cx="235" cy="120" r="10"/>
+         <circle class="fret-note" data-note="F#"  cx="305" cy="120" r="10"/>
+         <circle class="fret-note" data-note="G" cx="375" cy="120" r="10"/>
+         <circle class="fret-note" data-note="G#"  cx="445" cy="120" r="10"/>
+         <circle class="fret-note" data-note="A" cx="515" cy="120" r="10"/>
+         <circle class="fret-note" data-note="A#"  cx="585" cy="120" r="10"/>
+         <circle class="fret-note" data-note="B" cx="655" cy="120" r="10"/>
+         <circle class="fret-note" data-note="C"  cx="725" cy="120" r="10"/>
+         <circle class="fret-note" data-note="C#"  cx="795" cy="120" r="10"/>
+        <!-- G STRING -->
+         <circle class="fret-note" data-note="G"  cx="60"  cy="160" r="10"/>
+         <circle class="fret-note" data-note="G#"  cx="95"  cy="160" r="10"/>
+         <circle class="fret-note" data-note="A" cx="165" cy="160" r="10"/>
+         <circle class="fret-note" data-note="A#"  cx="235" cy="160" r="10"/>
+         <circle class="fret-note" data-note="B" cx="305" cy="160" r="10"/>
+         <circle class="fret-note" data-note="C"  cx="375" cy="160" r="10"/>
+         <circle class="fret-note" data-note="C#"  cx="445" cy="160" r="10"/>
+         <circle class="fret-note" data-note="D" cx="515" cy="160" r="10"/>
+         <circle class="fret-note" data-note="D#"  cx="585" cy="160" r="10"/>
+         <circle class="fret-note" data-note="E" cx="655" cy="160" r="10"/>
+         <circle class="fret-note" data-note="F"  cx="725" cy="160" r="10"/>
+         <circle class="fret-note" data-note="F#"  cx="795" cy="160" r="10"/>
+        <!-- B STRING -->
+         <circle class="fret-note" data-note="B" cx="60"  cy="200" r="10"/>
+         <circle class="fret-note" data-note="C" cx="95"  cy="200" r="10"/>
+         <circle class="fret-note" data-note="C#" cx="165" cy="200" r="10"/>
+         <circle class="fret-note" data-note="D" cx="235" cy="200" r="10"/>
+         <circle class="fret-note" data-note="D#"  cx="305" cy="200" r="10"/>
+         <circle class="fret-note" data-note="E" cx="375" cy="200" r="10"/>
+         <circle class="fret-note" data-note="F"  cx="445" cy="200" r="10"/>
+         <circle class="fret-note" data-note="F#"  cx="515" cy="200" r="10"/>
+         <circle class="fret-note" data-note="G" cx="585" cy="200" r="10"/>
+         <circle class="fret-note" data-note="G#"  cx="655" cy="200" r="10"/>
+         <circle class="fret-note" data-note="A" cx="725" cy="200" r="10"/>
+         <circle class="fret-note" data-note="A#"  cx="795" cy="200" r="10"/>
+        <!-- HIGH E -->
+         <circle class="fret-note" data-note="E"  cx="60"  cy="240" r="10"/>
+         <circle class="fret-note" data-note="F"  cx="95"  cy="240" r="10"/>
+         <circle class="fret-note" data-note="F#"  cx="165" cy="240" r="10"/>
+         <circle class="fret-note" data-note="G" cx="235" cy="240" r="10"/>
+         <circle class="fret-note" data-note="G#"  cx="305" cy="240" r="10"/>
+         <circle class="fret-note" data-note="A" cx="375" cy="240" r="10"/>
+         <circle class="fret-note" data-note="A#"  cx="445" cy="240" r="10"/>
+         <circle class="fret-note" data-note="B" cx="515" cy="240" r="10"/>
+         <circle class="fret-note" data-note="C"  cx="585" cy="240" r="10"/>
+         <circle class="fret-note" data-note="C#"  cx="655" cy="240" r="10"/>
+         <circle class="fret-note" data-note="D" cx="725" cy="240" r="10"/>
+         <circle class="fret-note" data-note="D#"  cx="795" cy="240" r="10"/>
+        </g>
+        <!-- FRET MARKERS -->
+         <g fill="#666">
+          <!-- 3rd fret -->
+          <circle cx="235" cy="10" r="6"/> 
+          <!-- 5th fret -->
+          <circle cx="375" cy="10" r="6"/>
+          <!-- 7th fret -->
+          <circle cx="515" cy="10" r="6"/>
+          <!-- 9th fret -->
+          <circle cx="655" cy="10" r="6"/>
+          </g>
+
+      </svg>
+      
+      
+      <button id="unlockBtn" onclick="checkRecall()">Unlock Chords</button>
+      <p id="recallFeedback"></p>
+    </div>
+
+    <!-- CHORD DIAGRAMS -->
+    <div id="chordDiagrams" style="display:none; margin-top:25px;">
+      <h3>🎼 Chord Shapes</h3>
+      <div id="diagramContainer"></div>
+    </div>
+
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h3>Saved Progressions</h3>
+    <ul id="savedList"></ul>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/midi-writer-js@2.1.4/build/MidiWriter.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
