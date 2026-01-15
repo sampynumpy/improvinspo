@@ -194,7 +194,7 @@ function unlockChords() {
 
     const img = document.createElement("img");
     const fileName = chord.replace(/\s+/g, "_").replace("#", "%23");
-    img.src = `/${fileName}.svg`;
+    img.src = `./${fileName}.svg`;
     img.style.width = "120px";
     img.alt = chord;
 
