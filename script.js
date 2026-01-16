@@ -37,24 +37,28 @@ function freqFromNote(note) {
 function updateTempo(val) {
   tempo = Number(val);
   document.getElementById("tempoValue").innerText = tempo;
+  if (metroInterval) toggleMetronome(true);
 }
 
-function toggleMetronome() {
-  if (metroInterval) {
+function toggleMetronome(restart = false) {
+  if (metroInterval && !restart) {
     clearInterval(metroInterval);
     metroInterval = null;
     return;
   }
-  metroInterval = setInterval(() => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.frequency.value = 1000;
-    gain.gain.value = 0.1;
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.05);
-  }, (60 / tempo) * 1000);
+  clearInterval(metroInterval);
+  metroInterval = setInterval(playClick, (60 / tempo) * 1000);
+}
+
+function playClick() {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.frequency.value = 1000;
+  gain.gain.value = 0.1;
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.05);
 }
 
 /* ---------- KEY ---------- */
